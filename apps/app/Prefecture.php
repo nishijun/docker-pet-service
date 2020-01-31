@@ -7,7 +7,7 @@ use App\User;
 
 class Prefecture extends Model
 {
-    $fillable = ['name'];
+    protected $fillable = ['name'];
 
     public function users() {
       return $this->hasMany('User');
