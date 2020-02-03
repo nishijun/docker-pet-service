@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Prefecture;
-use App\User;
 
 class HomeController extends Controller
 {
@@ -13,10 +11,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /**
      * Show the application dashboard.
@@ -25,25 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $prefectures = Prefecture::all();
-        return view('index', compact('prefectures'));
-    }
-
-    public function auth(Request $request) {
-
-        $request->validate([
-          'name' => 'required',
-          'email' => 'email | required',
-          'password' => 'required | min:4',
-          'prefecture_id' => 'required',
-        ]);
-        $user = new User([
-          'name' => $request->name,
-          'email' => $request->email,
-          'password' => bcrypt($request->password),
-          'prefecture_id' => $request->prefecture_id,
-        ]);
-        $user->save();
-        return redirect('/');
+        return view('home');
     }
 }
