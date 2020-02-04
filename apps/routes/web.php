@@ -11,10 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+Route::get('/top', ['as' => 'pet.top', 'uses' => 'PetController@index']);
+Route::post('/top', ['as' => 'pet.search', 'uses' => 'PetController@search']);
