@@ -17,5 +17,15 @@
 
 Auth::routes();
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
-Route::get('/top', ['as' => 'pet.top', 'uses' => 'PetController@index']);
-Route::post('/top', ['as' => 'pet.search', 'uses' => 'PetController@search']);
+Route::get('/top', ['as' => 'top', 'uses' => 'HomeController@top']);
+Route::post('/top', ['as' => 'top.search', 'uses' => 'HomeController@search']);
+
+Route::group(['middleware' => 'auth'], function() {
+  Route::get('/mypage', ['as' => 'mypage', 'uses' => 'MypageController@index']);
+  Route::get('/mypage/unsubscribe', ['as' => 'mypage.unsubscribe', 'uses' => 'MypageController@unsubscribe']);
+  Route::post('/mypage/unsubscribe', ['as' => 'mypage.withdraw', 'uses' => 'MypageController@withdraw']);
+  Route::get('/mypage/editProfile', ['as' => 'mypage.editProfile', 'uses' => 'MypageController@editProfile']);
+  Route::post('/mypage/editProfile', ['as' => 'mypage.updateUser', 'uses' => 'MypageController@updateUser']);
+  Route::get('/mypage/changePassword', ['as' => 'mypage.changePassword', 'uses' => 'MypageController@changePassword']);
+  Route::post('/mypage/changePassword', ['as' => 'mypage.updatePassword', 'uses' => 'MypageController@updatePassword']);
+});
