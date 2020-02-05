@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\Pet;
 use App\Prefecture;
+use App\AnimalCategory;
 use Carbon\Carbon;
 use Session;
+use App\Http\Requests\CreatePetRequest;
 
 class MypageController extends Controller
 {
@@ -88,8 +91,33 @@ class MypageController extends Controller
           $user = User::findOrFail(Auth::id());
           $user->password = Hash::make($request->password);
           $user->save();
-          
+
           return redirect('/mypage');
       }
+    }
+
+    public function registerPet() {
+      $animalCategories = AnimalCategory::all();
+      $count = 1;
+      return view('mypage.registerPet', compact('animalCategories', 'count'));
+    }
+
+    public function createPet(CreatePetRequest $request) {
+      $pet_pic1_path = Carbon::now().'_1_'.Auth::id().'.jpg';
+      $request->pic1->storeAs('public/pet_thumbnails', $pet_pic1_path);
+      $pet_pic2_path = Carbon::now().'_2_'.Auth::id().'.jpg';
+      $request->pic2->storeAs('public/pet_thumbnails', $pet_pic2_path);
+      $pet_pic3_path = Carbon::now().'_3_'.Auth::id().'.jpg';
+      $request->pic3->storeAs('public/pet_thumbnails', $pet_pic3_path);
+
+      $pet = new Pet();
+      $pet->fill($request->all());
+      $pet->pic1 = $pet_pic1_path;
+      $pet->pic2 = $pet_pic2_path;
+      $pet->pic3 = $pet_pic3_path;
+      $pet->user_id = Auth::id();
+      $pet->save();
+
+      return redirect('/mypage');
     }
 }

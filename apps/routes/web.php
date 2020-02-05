@@ -28,4 +28,6 @@ Route::group(['middleware' => 'auth'], function() {
   Route::post('/mypage/editProfile', ['as' => 'mypage.updateUser', 'uses' => 'MypageController@updateUser']);
   Route::get('/mypage/changePassword', ['as' => 'mypage.changePassword', 'uses' => 'MypageController@changePassword']);
   Route::post('/mypage/changePassword', ['as' => 'mypage.updatePassword', 'uses' => 'MypageController@updatePassword']);
+  Route::get('/mypage/registerPet', ['as' => 'mypage.registerPet', 'uses' => 'MypageController@registerPet']);
+  Route::post('/mypage/registerPet', ['as' => 'mypage.createPet', 'uses' => 'MypageController@createPet']);
 });
