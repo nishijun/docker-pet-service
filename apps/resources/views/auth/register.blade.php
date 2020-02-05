@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Register')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -58,20 +58,6 @@
                                 <option value="{{ $prefecture->id }}">{{ $prefecture->name }}</option>
                                 @endforeach
                               </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="thumbnail" class="col-md-4 col-form-label text-md-right">{{ __('Your Picture') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="thumbnail" type="file" class="form-control @error('thumbnail') is-invalid @enderror" name="thumbnail" autocomplete="thumbnail" autofocus>
-
-                                @error('thumbnail')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
                         </div>
 
