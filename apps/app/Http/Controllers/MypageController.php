@@ -105,16 +105,20 @@ class MypageController extends Controller
     public function createPet(CreatePetRequest $request) {
       $pet_pic1_path = Carbon::now().'_1_'.Auth::id().'.jpg';
       $request->pic1->storeAs('public/pet_thumbnails', $pet_pic1_path);
-      $pet_pic2_path = Carbon::now().'_2_'.Auth::id().'.jpg';
-      $request->pic2->storeAs('public/pet_thumbnails', $pet_pic2_path);
-      $pet_pic3_path = Carbon::now().'_3_'.Auth::id().'.jpg';
-      $request->pic3->storeAs('public/pet_thumbnails', $pet_pic3_path);
 
       $pet = new Pet();
       $pet->fill($request->all());
       $pet->pic1 = $pet_pic1_path;
-      $pet->pic2 = $pet_pic2_path;
-      $pet->pic3 = $pet_pic3_path;
+      if ($request->pic2) {
+        $pet_pic2_path = Carbon::now().'_2_'.Auth::id().'.jpg';
+        $request->pic2->storeAs('public/pet_thumbnails', $pet_pic2_path);
+        $pet->pic2 = $pet_pic2_path;
+      }
+      if ($request->pic3) {
+        $pet_pic3_path = Carbon::now().'_3_'.Auth::id().'.jpg';
+        $request->pic3->storeAs('public/pet_thumbnails', $pet_pic3_path);
+        $pet->pic3 = $pet_pic3_path;
+      }
       $pet->user_id = Auth::id();
       $pet->save();
 

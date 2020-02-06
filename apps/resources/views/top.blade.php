@@ -17,8 +17,31 @@
   <div class="pets">
     @foreach ($pets as $pet)
     <div class="pet">
-      <img src="public/user_thumbnails/{{ $pet->thumbnail }}" alt="">
-      <h2 class="pet-name">{{ $pet->name }}</h2>
+      <a href="{{ route('top.detail', ['id' => $pet->id]) }}">
+        @if ($pet->pic1)
+        <img src="/storage/pet_thumbnails/{{ $pet->pic1 }}" alt="">
+        @else
+        <img src="{{ asset('img/noimage.png') }}" alt="">
+        @endif
+        <h2 class="pet-name">{{ $pet->name }}</h2>
+        <p class="pet-info">
+          <span class="pet-gender">
+            @switch ($pet->gender)
+              @case (1)
+                Male
+                @break
+              @case (2)
+                Female
+                @break
+              @case (3)
+                Other
+                @break
+            @endswitch
+          </span>
+          <span class="pet-category">{{ $pet->animalCategory->name }}</span>
+        </p>
+        <p class="pet-prefecture">{{ $pet->user->prefecture->name }}</p>
+      </a>
     </div>
     @endforeach
   </div>

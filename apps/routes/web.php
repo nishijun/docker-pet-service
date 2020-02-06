@@ -19,6 +19,7 @@ Auth::routes();
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 Route::get('/top', ['as' => 'top', 'uses' => 'HomeController@top']);
 Route::post('/top', ['as' => 'top.search', 'uses' => 'HomeController@search']);
+Route::get('/top/{id}', ['as' => 'top.detail', 'uses' => 'HomeController@detail']);
 
 Route::group(['middleware' => 'auth'], function() {
   Route::get('/mypage', ['as' => 'mypage', 'uses' => 'MypageController@index']);

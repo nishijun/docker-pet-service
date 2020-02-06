@@ -21,18 +21,18 @@ class User extends Authenticatable
     protected $fillable = ['name', 'email', 'password', 'gender', 'age', 'prefecture_id', 'thumbnail'];
 
     public function pets() {
-      return $this->hasMany('Pet');
+      return $this->hasMany(Pet::class);
     }
 
-    public function precture() {
-      return $this->belongsTo('Precture');
+    public function prefecture() {
+      return $this->belongsTo(Prefecture::class);
     }
 
     public function boards() {
-      return $this->hasMany('Board', ['sell_user_id', 'buy_user_id']);
+      return $this->hasMany(Board::class, ['sell_user_id', 'buy_user_id']);
     }
 
     public function favorites() {
-      return $this->hasMany('Favorite');
+      return $this->hasMany(Favorite::class);
     }
 }

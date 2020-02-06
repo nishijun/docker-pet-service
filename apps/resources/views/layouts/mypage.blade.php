@@ -81,6 +81,7 @@
           </div>
           <div class="side-section">
             <ul>
+              <li><a href="{{ route('top') }}">Back to Pet List</a></li>
               <li><a href="{{ route('mypage.registerPet') }}">Register Pet</a></li>
               <li><a href="{{ route('mypage.editProfile') }}">Edit Profile</a></li>
               <li><a href="{{ route('mypage.changePassword') }}">Change Password</a></li>

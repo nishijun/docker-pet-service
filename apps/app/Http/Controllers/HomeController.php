@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Pet;
 use App\Prefecture;
+use App\AnimalCategory;
 
 class HomeController extends Controller
 {
@@ -36,5 +37,11 @@ class HomeController extends Controller
 
     public function search() {
 
+    }
+
+    public function detail($id) {
+      $pet = Pet::findOrFail($id);
+
+      return view('detail', compact('pet'));
     }
 }

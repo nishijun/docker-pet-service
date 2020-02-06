@@ -90,3 +90,32 @@ a {
     background: skyblue;
   }
 }
+
+// Pet List
+.container-original {
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  .side-bar {
+    width: 20%;
+    background: #F9F8F3;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .main-wrapper {
+    width: 75%;
+    .pets {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      .pet {
+        width: 30%;
+        img {
+          width: 100%;
+          height: 150px;
+          object-fit: contain;
+        }
+      }
+    }
+  }
+}
