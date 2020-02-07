@@ -29,7 +29,7 @@ class User extends Authenticatable
     }
 
     public function boards() {
-      return $this->hasMany(Board::class, ['sell_user_id', 'buy_user_id']);
+      return $this->hasMany(Board::class, 'sell_user_id');
     }
 
     public function favorites() {

@@ -31,4 +31,5 @@ Route::group(['middleware' => 'auth'], function() {
   Route::post('/mypage/changePassword', ['as' => 'mypage.updatePassword', 'uses' => 'MypageController@updatePassword']);
   Route::get('/mypage/registerPet', ['as' => 'mypage.registerPet', 'uses' => 'MypageController@registerPet']);
   Route::post('/mypage/registerPet', ['as' => 'mypage.createPet', 'uses' => 'MypageController@createPet']);
+  Route::post('/top/{id}', ['as' => 'board', 'uses' => 'HomeController@createBoard']);
 });

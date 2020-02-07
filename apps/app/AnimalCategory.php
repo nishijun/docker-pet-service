@@ -10,6 +10,6 @@ class AnimalCategory extends Model {
     protected $fillable = ['name'];
 
     public function pets() {
-      return $this->hasMany('Pet', 'animal_category_id');
+      return $this->hasMany(Pet::class, 'animal_category_id');
     }
 }

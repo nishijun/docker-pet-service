@@ -2,15 +2,24 @@
 @section('title', 'Top')
 @section('content')
 <div class="side-bar">
-  <form class="" action="{{ route('top.search') }}" method="post">
+  <form action="{{ route('top.search') }}" method="post">
     @csrf
-    <label for="">Prefecture</label>
-    <select class="" name="prefecture_id">
+    <h2>Search Form</h2>
+    <label for="prefecture_id">Prefecture</label>
+    <select id="prefecture_id" name="prefecture_id">
       <option value="">Please Choose Below</option>
       @foreach ($prefectures as $prefecture)
-      <option value="{{ $prefecture->id }}">{{ $prefecture->name }}</option>
+      <option value="{{ $prefecture->id }}" @if ($prefecture->id == $prefecture_id) selected @endif>{{ $prefecture->name }}</option>
       @endforeach
     </select>
+    <label for="animal_category_id">Animal Species</label>
+    <select id="animal_category_id" name="animal_category_id">
+      <option value="">Please Choose Below</option>
+      @foreach ($animalCategories as $animalCategory)
+      <option value="{{ $animalCategory->id }}" @if ($animalCategory->id == $animal_category_id) selected @endif>{{ $animalCategory->name }}</option>
+      @endforeach
+    </select>
+    <input type="submit" value="Search">
   </form>
 </div>
 <div class="main-wrapper">

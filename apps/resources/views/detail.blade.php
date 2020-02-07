@@ -43,8 +43,14 @@
   <div>{{ $pet->body }}</div>
 </div>
 <div class="apply-area">
-  <form action="" method="post">
-    <input type="submit" value="Contact Owner">
-  </form>
+  @if ($pet->user_id === Auth::id())
+    <p>Your pet</p>
+  @else
+    <form action="{{ route('board', ['id' => $pet->id]) }}" method="post">
+      @csrf
+      <input type="text" name="sell_user_id" value="{{ $pet->user->id }}" style="display:none;">
+      <input type="submit" value="Contact Owner">
+    </form>
+  @endif
 </div>
 @endsection

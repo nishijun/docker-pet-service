@@ -10,6 +10,6 @@ class Message extends Model
     protected $fillable = ['body', 'send_date'];
 
     public function board() {
-      return $this->belongsTo('Board');
+      return $this->belongsTo(Board::class);
     }
 }

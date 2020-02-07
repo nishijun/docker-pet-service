@@ -25,7 +25,10 @@ class CreatePetRequest extends FormRequest
     {
         return [
           'name' => 'required | string | max:255',
-          'price' => 'required | integer',
+          'age' => 'required',
+          'gender' => 'required',
+          'animal_category_id' => 'required',
+          'price' => 'required | numeric',
           'body' => 'required',
           'pic1' => 'required | file | image | mimes:jpeg,png,jpg,gif | max:2048',
           'pic2' => 'file | image | mimes:jpeg,png,jpg,gif | max:2048',
