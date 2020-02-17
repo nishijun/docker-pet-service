@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Pet;
 use App\Prefecture;
 use App\Board;
+use App\Message;
 use App\Favorite;
 
 class User extends Authenticatable
@@ -30,6 +31,10 @@ class User extends Authenticatable
 
     public function boards() {
       return $this->hasMany(Board::class, 'sell_user_id');
+    }
+
+    public function messages() {
+      $this->hasMany(Message::class, 'send_user_id');
     }
 
     public function favorites() {

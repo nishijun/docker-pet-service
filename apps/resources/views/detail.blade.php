@@ -46,7 +46,7 @@
   @if ($pet->user_id === Auth::id())
     <p>Your pet</p>
   @else
-    <form action="{{ route('board', ['id' => $pet->id]) }}" method="post">
+    <form action="{{ route('board1', ['id' => $pet->id]) }}" method="post">
       @csrf
       <input type="text" name="sell_user_id" value="{{ $pet->user->id }}" style="display:none;">
       <input type="submit" value="Contact Owner">

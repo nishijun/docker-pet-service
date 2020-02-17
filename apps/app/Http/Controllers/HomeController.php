@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use App\Pet;
 use App\Prefecture;
 use App\AnimalCategory;
@@ -71,11 +72,10 @@ class HomeController extends Controller
       return view('detail', compact('pet'));
     }
 
-    public function createBoard(Request $request, $id) {
+    public function board1(Request $request, $id) {
       $board = Board::where('buy_user_id', Auth::id())->where('pet_id', $id)->first();
       if ($board) {
-        $messages = Message::where('board_id', $board->id);
-        return view('board', compact('board', 'messages'));
+        return redirect(route('board2', ['id' => $board->pet_id, 'bId' => $board->id]));
       }
 
       $newBoard = new Board([
@@ -85,6 +85,33 @@ class HomeController extends Controller
       ]);
       $newBoard->save();
       $board = Board::where('buy_user_id', Auth::id())->where('pet_id', $id)->first();
-      return view('board', compact('board'));
+
+      return redirect(route('board2', ['id' => $board->pet_id, 'bId' => $board->id]));
+    }
+
+    public function board2($id, $bId) {
+      $board = Board::find($bId);
+      $pet = Pet::find($id);
+      $messages = Message::where('board_id', $bId)->get();
+    
+      return view('board', compact('board', 'pet', 'messages'));
+    }
+
+    public function message(Request $request, $id, $bId) {
+      $request->validate([
+        'body' => 'required'
+      ]);
+      $board = Board::find($bId);
+      $pet = Pet::find($id);
+      $message = new Message([
+        'board_id' => $bId,
+        'send_user_id' => Auth::id(),
+        'recieve_user_id' => $pet->user_id,
+        'send_date' => Carbon::now(),
+        'body' => $request->body
+      ]);
+      $message->save();
+      $messages = Message::where('board_id', $bId)->get();
+      return view('board', compact('board', 'pet', 'messages'));
     }
 }

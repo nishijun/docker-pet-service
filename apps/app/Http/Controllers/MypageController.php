@@ -51,6 +51,7 @@ class MypageController extends Controller
       $user = User::findOrFail(Auth::id());
       $user->fill($request->all());
       $user->thumbnail = $user_thumbnail_path;
+      dd($user->thumbnail);
       $user->save();
 
       return redirect('/mypage');
