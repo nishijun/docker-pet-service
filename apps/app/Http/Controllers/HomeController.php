@@ -10,6 +10,7 @@ use App\Prefecture;
 use App\AnimalCategory;
 use App\Board;
 use App\Message;
+use App\Favorite;
 
 class HomeController extends Controller
 {
@@ -90,10 +91,16 @@ class HomeController extends Controller
     }
 
     public function board2($id, $bId) {
-      $board = Board::find($bId);
       $pet = Pet::find($id);
+      $board = Board::find($bId);
+      if (!$board) {
+        return redirect(route('top.detail', ['id' => $pet->id]));
+      }
+      if ($board->buy_user_id !== Auth::id()) {
+        return redirect(route('top.detail', ['id' => $pet->id]));
+      }
       $messages = Message::where('board_id', $bId)->get();
-    
+
       return view('board', compact('board', 'pet', 'messages'));
     }
 
@@ -114,4 +121,8 @@ class HomeController extends Controller
       $messages = Message::where('board_id', $bId)->get();
       return view('board', compact('board', 'pet', 'messages'));
     }
+
+    // public function favorite(Request $request, $id) {
+    //
+    // }
 }

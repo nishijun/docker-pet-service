@@ -55,8 +55,11 @@ a {
 .cb {
   clear: both;
 }
-.d-none {
-  display: none;
+.fas {
+  cursor: pointer;
+  &.active {
+    color: red;
+  }
 }
 
 // Hero

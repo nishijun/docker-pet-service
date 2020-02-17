@@ -34,4 +34,5 @@ Route::group(['middleware' => 'auth'], function() {
   Route::post('/top/{id}', ['as' => 'board1', 'uses' => 'HomeController@board1']);
   Route::get('/top/{id}/{bId}', ['as' => 'board2', 'uses' => 'HomeController@board2']);
   Route::post('/top/{id}/{bId}', ['as' => 'message', 'uses' => 'HomeController@message']);
+  // Route::post('/top/{id}/favorite', ['as' => 'favorite', 'uses' => 'HomeController@favorite']);
 });
