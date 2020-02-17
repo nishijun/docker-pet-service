@@ -39,7 +39,7 @@ class MypageController extends Controller
     public function updateUser(Request $request) {
       $request->validate([
         'name' => 'required | string | max:255',
-        'email' => 'required | string | email | max:255 | unique:users',
+        'email' => 'required | string | email | max:255',
         'thumbnail' => 'required | file | image | mimes:jpeg,png,jpg,gif | max:2048'
       ]);
 
@@ -51,7 +51,6 @@ class MypageController extends Controller
       $user = User::findOrFail(Auth::id());
       $user->fill($request->all());
       $user->thumbnail = $user_thumbnail_path;
-      dd($user->thumbnail);
       $user->save();
 
       return redirect('/mypage');
