@@ -12,7 +12,8 @@ $('.js-click-favorite').on('click', function() {
   let pet = $this.data('pet');
   $.ajax({
     type: 'POST',
-    url: '/top/' + pet + '/favorite',
+    url: '../ajax.php',
+    // url: '/top/' + pet + '/favorite',
     data: {
       pet_id: pet
     }

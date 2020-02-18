@@ -1,21 +1,30 @@
 <?php
-use \App\Favorite;
 use Illuminate\Support\Facades\Auth;
 
-$newFavorite = new Favorite([
-  'user_id' => Auth::id(),
-  'pet_id' => 1
-]);
-$newFavorite->save();
+try {
+  $dsn = "mysql:host=db-host;dbname=pet;charset=utf8";
+  $user = 'root';
+  $password = 'root';
 
-// $favorite = Favorite::where('user_id', Auth::id())->where('pet_id', $_POST['pet_id'])->first();
-//
-// if (!$favorite) {
-//   $newFavorite = new Favorite([
-//     'user_id' => Auth::id(),
-//     'pet_id' => $_POST['pet_id']
-//   ]);
-//   $newFavorite->save();
-// } else {
-//   $favorite->forceDelete();
-// }
+  $options = [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,
+  ];
+  $dbh = new PDO($dsn, $user, $password, $options);
+
+  $stmt = $dbh->prepare('SELECT * FROM favorites WHERE user_id = :user_id AND pet_id = :pet_id');
+  $stmt->execute([':user_id' => Auth::id(), 'pet_id' => $_POST['pet_id']]);
+  $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  if (!$result) {
+    $stmt = $dbh->prepare('INSERT INTO favorites (user_id, pet_id) VALUES (:user_id, :pet_id)');
+    $stmt->execute([':user_id' => Auth::id(), ':pet_id' => $_POST['pet_id']]);
+  } else {
+    $stmt = $dbh->prepare('DELETE FROM favorites WHERE user_id = :user_id AND pet_id = :pet_id');
+    $stmt->execute([':user_id' => Auth::id(), ':pet_id' => $_POST['pet_id']]);
+  }
+} catch (PDOException $e) {
+  $e->getMessage();
+  exit;
+}
