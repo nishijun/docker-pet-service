@@ -1,19 +1,21 @@
 <?php
 use \App\Favorite;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-function ajax(Request $request) {
-  $favorite = Favorite::where('user_id', Auth::id())->where('pet_id', $request->pet_id)->first();
+$newFavorite = new Favorite([
+  'user_id' => Auth::id(),
+  'pet_id' => 1
+]);
+$newFavorite->save();
 
-  if (!$favorite) {
-    $newFavorite = new Favorite([
-      'user_id' => Auth::id(),
-      'pet_id' => $request->pet_id
-    ]);
-    $newFavorite->save();
-  } else {
-    $favorite->forceDelete();
-  }
-}
-
-ajax();
+// $favorite = Favorite::where('user_id', Auth::id())->where('pet_id', $_POST['pet_id'])->first();
+//
+// if (!$favorite) {
+//   $newFavorite = new Favorite([
+//     'user_id' => Auth::id(),
+//     'pet_id' => $_POST['pet_id']
+//   ]);
+//   $newFavorite->save();
+// } else {
+//   $favorite->forceDelete();
+// }

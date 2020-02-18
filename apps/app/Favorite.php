@@ -7,7 +7,7 @@ use App\User;
 
 class Favorite extends Model
 {
-  protected $fillable = ['pet_id'];
+  protected $fillable = ['pet_id', 'user_id'];
 
   public function user() {
     return $this->belongsTo(User::class);

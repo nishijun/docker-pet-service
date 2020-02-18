@@ -122,7 +122,11 @@ class HomeController extends Controller
       return view('board', compact('board', 'pet', 'messages'));
     }
 
-    // public function favorite(Request $request, $id) {
-    //
-    // }
+    public function favorite($id) {
+      $newFavorite = new Favorite([
+        'user_id' => Auth::id(),
+        'pet_id' => $id
+      ]);
+      $newFavorite->save();
+    }
 }
