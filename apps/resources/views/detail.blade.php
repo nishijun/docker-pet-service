@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('title', 'Detail')
 @section('content')
+<div class="favorite-area">
+  <i class="fas fa-heart js-click-favorite" id='favorite' data-pet="{{ $pet->id }}"></i>
+</div>
 <div class="pic-area">
   <span>{{ $pet->animalCategory->name }}</span>
   <div class="main-pic">
