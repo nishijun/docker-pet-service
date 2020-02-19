@@ -1,88 +1,86 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>Pet | @yield('title')</title>
 
-    <title>Pet | @yield('title')</title>
+  <!-- Scripts -->
+  <script src="{{ asset('js/app.js') }}" defer></script>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+  <!-- Fonts -->
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
+  <!-- Styles -->
+  <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
+  <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                  Pet
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+<!-- Header -->
+<header class="header">
+  <a href='#' class="header-left">Pet</a>
+  <div class="header-right">
 
-                    </ul>
+    @guest
+    <ul class="header-right-menu">
+      <li class="header-right-menu-item">
+        <a class="header-right-menu-item-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+      </li>
+      <li class="header-right-menu-item">
+        <a class="header-right-menu-item-link" href="{{ route('register') }}">{{ __('Signup') }}</a>
+      </li>
+    </ul>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+    @else
+    <p class="header-right-userName">
+      {{ Auth::user()->name }}
+      <span class="header-right-userName-icon">
+        <i class="fas fa-caret-down"></i>
+      </span>
+    </p>
+    <img class="header-right-thumbnail" src="/storage/user_thumbnails/{{ Auth::user()->thumbanil }}" alt="User thumbnail">
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('mypage') }}">
-                                      {{ __('MyPage') }}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <main class="py-4 container-original">
-            @yield('content')
-        </main>
+    <!-- NavbarToggler -->
+    <div class="header-right-hidden">
+      <ul class="header-right-hidden-menu">
+        <li class="header-right-hidden-menu-item">
+          <a class="header-right-hidden-menu-item-link" href="{{ route('mypage') }}">
+            {{ __('MyPage') }}
+          </a>
+        </li>
+        <li class="header-right-hidden-menu-item">
+          <a class="header-right-hidden-menu-item-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+          </a>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+          </form>
+        </li>
+      </ul>
     </div>
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-      crossorigin="anonymous"></script>
-    <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
+    @endguest
+  </div>
+</header>
+
+<!-- Main Contents -->
+<main id="main">
+    @yield('content')
+</main>
+
+<!-- Footer -->
+<footer id="footer">
+  <p class="footer-left">Pet</p>
+  <p class="footer-right">Copyright ©Junya Nishiwaki All Right Reserved.</p>
+</footer>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
+
 </body>
 </html>
