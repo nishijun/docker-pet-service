@@ -69,8 +69,8 @@ class HomeController extends Controller
 
     public function detail($id) {
       $pet = Pet::findOrFail($id);
-
-      return view('detail', compact('pet'));
+      $favorite = Favorite::where('pet_id', $id)->where('user_id', Auth::id())->first();
+      return view('detail', compact('pet', 'favorite'));
     }
 
     public function board1(Request $request, $id) {
@@ -122,11 +122,16 @@ class HomeController extends Controller
       return view('board', compact('board', 'pet', 'messages'));
     }
 
-    public function favorite($id) {
-      $newFavorite = new Favorite([
-        'user_id' => Auth::id(),
-        'pet_id' => $id
-      ]);
-      $newFavorite->save();
+    public function favorite() {
+      $favorite = Favorite::where('pet_id', $_POST['pet_id'])->where('user_id', Auth::id())->first();
+      if ($favorite) {
+        $favorite->forceDelete();
+      } else {
+        $newFavorite = new Favorite([
+          'user_id' => Auth::id(),
+          'pet_id' => $_POST['pet_id']
+        ]);
+        $newFavorite->save();
+      }
     }
 }

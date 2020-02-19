@@ -1,9 +1,11 @@
 @extends('layouts.app')
 @section('title', 'Detail')
 @section('content')
+@if ($pet->user_id !== Auth::id())
 <div class="favorite-area">
-  <i class="fas fa-heart js-click-favorite" id='favorite' data-pet="{{ $pet->id }}"></i>
+  <i class="fas fa-heart js-click-favorite @if ($favorite) active @endif" id='favorite' data-pet="{{ $pet->id }}"></i>
 </div>
+@endif
 <div class="pic-area">
   <span>{{ $pet->animalCategory->name }}</span>
   <div class="main-pic">
