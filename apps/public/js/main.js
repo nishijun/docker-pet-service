@@ -1,6 +1,15 @@
 $(function() {
 'use strict';
 
+$('.js-click-userMenu').on('click', function() {
+  $('.js-click-showUserMenu').toggleClass('active');
+  $('.js-whole').toggleClass('active');
+});
+$('.js-whole').on('click', function() {
+  $(this).removeClass('active');
+  $('.js-click-showUserMenu').removeClass('active');
+});
+
 $.ajaxSetup({
   headers: {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

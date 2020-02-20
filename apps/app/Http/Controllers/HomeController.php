@@ -30,7 +30,10 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index() {
-        return view('index');
+      if (Auth::check()) {
+        return redirect(route('top'));
+      }
+      return view('index');
     }
 
     public function top() {

@@ -20,13 +20,12 @@
   <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
 </head>
 <body>
-
+<div class="js-whole"></div>
 <!-- Header -->
 <header class="header">
-  <a href='#' class="header-left">Pet</a>
+  <a href='/' class="header-left">Pet</a>
   <div class="header-right">
-
-    @guest
+  @guest
     <ul class="header-right-menu">
       <li class="header-right-menu-item">
         <a class="header-right-menu-item-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -36,17 +35,23 @@
       </li>
     </ul>
 
-    @else
-    <p class="header-right-userName">
-      {{ Auth::user()->name }}
-      <span class="header-right-userName-icon">
-        <i class="fas fa-caret-down"></i>
-      </span>
-    </p>
-    <img class="header-right-thumbnail" src="/storage/user_thumbnails/{{ Auth::user()->thumbanil }}" alt="User thumbnail">
+  @else
+    <div class="header-right-menu">
+      <p class="header-right-userName js-click-userMenu">
+        {{ Auth::user()->name }}
+        <span class="header-right-userName-icon">
+          <i class="fas fa-caret-down"></i>
+        </span>
+      </p>
+      @if (Auth::user()->thumbnail)
+      <img class="header-right-thumbnail" src="/storage/user_thumbnails/{{ Auth::user()->thumbnail }}" alt="User thumbnail">
+      @else
+      <img class="header-right-thumbnail" src="{{ asset('img/noimage.png') }}" alt="No image">
+      @endif
+    </div>
 
     <!-- NavbarToggler -->
-    <div class="header-right-hidden">
+    <div class="header-right-hidden js-click-showUserMenu">
       <ul class="header-right-hidden-menu">
         <li class="header-right-hidden-menu-item">
           <a class="header-right-hidden-menu-item-link" href="{{ route('mypage') }}">
@@ -63,7 +68,7 @@
         </li>
       </ul>
     </div>
-    @endguest
+  @endguest
   </div>
 </header>
 
@@ -73,9 +78,9 @@
 </main>
 
 <!-- Footer -->
-<footer id="footer">
+<footer class="footer">
   <p class="footer-left">Pet</p>
-  <p class="footer-right">Copyright ©Junya Nishiwaki All Right Reserved.</p>
+  <p class="footer-right">Copyright ©<a href="https://twitter.com/Junya_Singer">Junya Nishiwaki</a> All Right Reserved.</p>
 </footer>
 
 <!-- Scripts -->
