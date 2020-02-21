@@ -41,8 +41,9 @@ class HomeController extends Controller
       $animal_category_id = '';
       $prefectures = Prefecture::all();
       $pets = Pet::all();
+      $hit_count = Pet::all()->count();
       $animalCategories = AnimalCategory::all();
-      return view('top', compact('pets', 'prefectures', 'animalCategories', 'prefecture_id', 'animal_category_id'));
+      return view('top', compact('pets', 'prefectures', 'animalCategories', 'prefecture_id', 'animal_category_id', 'hit_count'));
     }
 
     public function search(Request $request) {
@@ -60,14 +61,16 @@ class HomeController extends Controller
           $query->where('animal_category_id', $animal_category_id);
         }
         $pets = $query->get();
+        $hit_count = $query->get()->count();
       } else {
         $pets = Pet::all();
+        $hit_count = Pet::all()->count();
       }
 
       $prefectures = Prefecture::all();
       $animalCategories = AnimalCategory::all();
 
-      return view('top', compact('pets', 'prefectures', 'animalCategories', 'prefecture_id', 'animal_category_id'));
+      return view('top', compact('pets', 'prefectures', 'animalCategories', 'prefecture_id', 'animal_category_id', 'hit_count'));
     }
 
     public function detail($id) {

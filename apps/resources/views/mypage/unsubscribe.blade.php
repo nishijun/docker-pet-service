@@ -1,9 +1,10 @@
 @extends('layouts.mypage')
 @section('title', 'Unsubscribe')
 @section('content')
-<h1>Unsubscribe</h1>
-<form action="{{ route('mypage.withdraw') }}" method="post">
+<form class="form" action="{{ route('mypage.withdraw') }}" method="post">
   @csrf
-  <input type="submit" value="Unsubscribe">
+  <h1 class="section-title">Unsubscribe</h1>
+  <div class="title-line"></div>
+  <input type="submit" value="Unsubscribe" class="form-submit">
 </form>
 @endsection

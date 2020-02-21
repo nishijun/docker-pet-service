@@ -1,49 +1,86 @@
 @extends('layouts.mypage')
 @section('title', 'Register Pet')
 @section('content')
-<h1>Register Pet</h1>
-<form  action="{{ route('mypage.createPet') }}" method="post" enctype="multipart/form-data">
+<form class="form" action="{{ route('mypage.createPet') }}" method="post" enctype="multipart/form-data">
   @csrf
-  <label for="name">Name</label>
-  <input id='name' type="text" name="name" value="{{ old('name') }}">
+  <h1 class="section-title">Register Pet</h1>
+  <div class="title-line"></div>
+
+  <!-- Name -->
+  <label for="name" class="form-label">Name</label><span class="form-required">Required</span>
+  <input id='name' type="text" name="name" value="{{ old('name') }}" class="form-input">
   @error('name')
     <p>{{ $message }}</p>
   @enderror
-  <label for="age">Age</label>
-  <select id="age" name="age">
-    <option value="">Please Choose Below</option>
-    @for ($i = 0; $i <= 30; $i++)
-    <option value="{{ $i }}">{{ $i }}</option>
-    @endfor
-  </select>
-  <label for="">Gender</label>
-  <input type="radio" name="gender" value="1">Male
-  <input type="radio" name="gender" value="2">Female
-  <input type="radio" name="gender" value="3">Other
-  <label for="animal_category_id">Kind of Animal</label>
+
+  <!-- Age -->
+  <label for="age" class="form-label">Age</label><span class="form-required">Required</span><br>
+  <div class="cp_ipselect cp_sl04">
+    <select id="age" name="age" class="form-select">
+      <option value="">Please Choose Below</option>
+      @for ($i = 0; $i <= 30; $i++)
+      <option value="{{ $i }}">{{ $i }}</option>
+      @endfor
+    </select>
+  </div>
+
+  <!-- Gender -->
+  <label for="gender" class="form-label">Gender</label><span class="form-required">Required</span><br>
+  <input type="radio" name="gender" value="1" class="form-radio">Male
+  <input type="radio" name="gender" value="2" class="form-radio">Female
+  <input type="radio" name="gender" value="3" class="form-radio">Other<br>
+
+  <!-- Animal Category -->
+  <label for="animal_category_id" class="form-label">Kind of Animal</label><span class="form-required">Required</span><br>
   @foreach ($animalCategories as $animalCategory)
-  <input type="radio" name="animal_category_id" value="{{ $count }}">{{ $animalCategory->name }}
+  <input type="radio" name="animal_category_id" value="{{ $count }}" class="form-radio">{{ $animalCategory->name }}
+  @if ($count === 3)
+    <br class="responsive">
+  @endif
   <?php $count++ ?>
   @endforeach
-  <label for="price">Price</label>
-  <input id="price" type="number" name="price" value="{{ old('price') }}">
+
+  <!-- Price -->
+  <br><label for="price" class="form-label">Price</label><span class="form-required">Required</span>
+  <input id="price" type="number" name="price" value="{{ old('price') }}" class="form-input" required>
   @error('price')
     <p>{{ $message }}</p>
   @enderror
-  <label for="body">Detail</label>
-  <textarea id="body" name="body">{{ old('body') }}</textarea>
+
+  <!-- Body -->
+  <label for="body" class="form-label">Detail</label><span class="form-required">Required</span>
+  <textarea id="body" name="body" class="form-textarea" required>{{ old('body') }}</textarea>
   @error('body')
     <p>{{ $message }}</p>
   @enderror
-  <label for="pic1">Thumbnail 1</label>
-  <input id="pic1" type="file" name="pic1">
+
+  <!-- Thumbnail -->
+  <label class="form-label">Pictures</label><span class="form-required">Required</span>
+  <div class="form-images">
+    <!-- Pic1 -->
+    <div class="form-image js-image-area">
+      <input type="file" name="pic1" value="{{ old('pic1') }}" class="form-image-file js-image">
+      <img class="prev-img" alt="Pet thumbnail" style="display:none;">
+      Picture1 Required
+    </div>
+    <!-- Pic2 -->
+    <div class="form-image js-image-area">
+      <input type="file" name="pic2" value="{{ old('pic2') }}" class="form-image-file js-image">
+      <img class="prev-img" alt="Pet thumbnail" style="display:none;">
+      Picture2
+    </div>
+    <!-- Pic3 -->
+    <div class="form-image js-image-area">
+      <input type="file" name="pic3" value="{{ old('pic3') }}" class="form-image-file js-image">
+      <img class="prev-img" alt="Pet thumbnail" style="display:none;">
+      Picture3
+    </div>
+  </div>
   @error ('pic1')
    <p>{{ $message }}</p>
   @enderror
-  <label for="pic2">Thumbnail 2</label>
-  <input id="pic2" type="file" name="pic2">
-  <label for="pic3">Thumbnail 3</label>
-  <input id="pic3" type="file" name="pic3">
-  <input type="submit" value="Register">
+
+  <!-- Submit -->
+  <input type="submit" value="Register" class="form-submit">
 </form>
 @endsection
