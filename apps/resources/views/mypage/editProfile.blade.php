@@ -34,6 +34,7 @@
   <label for="age" class="form-label">Age</label>
   <div class="cp_ipselect cp_sl04">
     <select id="age" name="age" class="form-select">
+      <option value="">Choose Below</option>
       @for ($i = 0; $i <= 130; $i++)
       <option value="{{ $i }}" @if ($user->age === $i) selected @endif>{{ $i }}</option>
       @endfor

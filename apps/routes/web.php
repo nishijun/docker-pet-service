@@ -20,6 +20,7 @@ Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 Route::get('/top', ['as' => 'top', 'uses' => 'HomeController@top']);
 Route::post('/top', ['as' => 'top.search', 'uses' => 'HomeController@search']);
 Route::get('/top/{id}', ['as' => 'top.detail', 'uses' => 'HomeController@detail']);
+Route::get('/top/{id}/owner', ['as' => 'owner', 'uses' => 'HomeController@owner']);
 
 Route::group(['middleware' => 'auth'], function() {
   Route::get('/mypage', ['as' => 'mypage', 'uses' => 'MypageController@index']);
@@ -34,6 +35,5 @@ Route::group(['middleware' => 'auth'], function() {
   Route::post('/top/{id}', ['as' => 'board1', 'uses' => 'HomeController@board1']);
   Route::get('/top/{id}/{bId}', ['as' => 'board2', 'uses' => 'HomeController@board2']);
   Route::post('/top/{id}/{bId}', ['as' => 'message', 'uses' => 'HomeController@message']);
-
   Route::post('/ajax', ['as' => 'favorite', 'uses' => 'HomeController@favorite']);
 });

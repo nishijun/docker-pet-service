@@ -53,6 +53,30 @@ a {
     color: $color_weak;
   }
 }
+img {
+  width: 100%;
+}
+.fa-mars {
+  color: skyblue;
+}
+.fa-venus {
+  color: $color_weak;
+}
+.fa-cat {
+  background: $color_strong;
+}
+.fa-dog {
+  background: skyblue;
+}
+.fa-dove {
+  background: lightgreen;
+}
+.fa-bug {
+  background: rgb(237, 169, 76);
+}
+.fa-question {
+  background: $color_default;
+}
 .cb {
   clear: both;
 }
@@ -60,12 +84,6 @@ a {
   display: none;
   @include mq() {
     display: block;
-  }
-}
-.fas {
-  cursor: pointer;
-  &.active {
-    color: red;
   }
 }
 .section-title {
@@ -540,12 +558,6 @@ a {
           margin-bottom: 10px;
           .pet-gender {
             margin-left: 7px;
-            .fa-mars {
-              color: skyblue;
-            }
-            .fa-venus {
-              color: $color_weak;
-            }
           }
         }
       }
@@ -568,6 +580,253 @@ a {
           @include mq() {
             width: 100%;
           }
+        }
+      }
+    }
+  }
+}
+
+
+// Deatil
+.container-detail {
+  max-width: 1300px;
+  margin: 100px auto 20px;
+  padding: 0 20px;
+  min-height: 100vh;
+  .pic-area {
+    display: flex;
+    justify-content: space-between;
+    .main-pic {
+      width: 70%;
+      .option-area {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        i {
+          color: #fff;
+          font-size: $font-size_xl;
+          cursor: default;
+          text-align: center;
+          width: 30px;
+          padding: 5px 10px;
+        }
+        .fa-heart {
+          cursor: pointer;
+          color: $color_corp;
+          &.active {
+            color: $color_strong;
+          }
+        }
+      }
+    }
+    .sub-pic {
+      padding-top: 68px;
+      width: 25%;
+      margin-left: 5%;
+      img {
+        cursor: pointer;
+        margin-bottom: 30px;
+      }
+    }
+  }
+  .detail-area {
+    table, td, th{
+      border: 1px solid $color_corp;
+    }
+    table {
+      width: 100%;
+      margin: 20px 0;
+      th {
+        width: calc(100% / 6);
+        background: $color_weak;
+        color: #fff;
+        padding: 10px 0;
+        font-weight: bold;
+      }
+      td {
+        padding: 10px 0;
+        text-align: center;
+      }
+    }
+    .body {
+      color: $color_corp;
+      background: rgba(226, 215, 179, .5);
+      min-height: 200px;
+      padding: 10px;
+      box-sizing: border-box;
+      margin-bottom: 30px;
+    }
+  }
+  .apply-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    .yourpet {
+      background: #ddd;
+      font-weight: bold;
+      color: $color_corp;
+      width: 150px;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+    }
+    input[type="submit"] {
+      display: block;
+      color: #fff;
+      font-size: $font-size_xl;
+      background: $color_strong;
+      font-family: $font-family_corp;
+      width: 150px;
+      height: 50px;
+      line-height: 50px;
+      border: none;
+      box-sizing: border-box;
+      cursor: pointer;
+      transition: .3s;
+      &:hover {
+        opacity: .7;
+      }
+    }
+  }
+  @include mq(md) {
+    .pic-area {
+      flex-wrap: wrap;
+      .main-pic, .sub-pic {
+        width: 100%;
+      }
+      .sub-pic {
+        padding-top: 10px;
+        margin-left: 0;
+        display: flex;
+        justify-content: space-between;
+        img {
+          width: 48%;
+          margin-bottom: 0;
+        }
+      }
+    }
+    .detail-area {
+      table {
+        display: flex;
+        thead {
+          width: 30%;
+          tr {
+            display: flex;
+            flex-direction: column;
+            th {
+              width: 100%;
+            }
+          }
+        }
+        tbody {
+          width: 70%;
+          tr {
+            display: flex;
+            flex-direction: column;
+          }
+        }
+      }
+    }
+  }
+  @include mq() {
+    .apply-area {
+      flex-direction: column;
+      a {
+        order: 2;
+      }
+      .yourpet, input[type="submit"] {
+        order: 1;
+        margin-bottom: 30px;
+      }
+    }
+  }
+}
+
+// Owner
+.owner-page {
+  max-width: 1300px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 100px 20px 20px;
+  .owner-img {
+    width: 45%;
+    margin-right: 5%;
+  }
+  .owner-detail {
+    width: 50%;
+    table, td, th{
+      border: 1px solid $color_corp;
+    }
+    table {
+      text-align: center;
+      width: 100%;
+      margin-bottom: 30px;
+      th, td {
+        width: 50%;
+        padding: 10px 0;
+      }
+      th {
+        background: $color_weak;
+        color: #fff;
+        font-weight: bold;
+      }
+    }
+  }
+  @include mq(lg) {
+    flex-direction: column;
+    justify-content: flex-start;
+    .owner-img {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 30px;
+    }
+    .owner-detail {
+      width: 100%;
+    }
+  }
+}
+
+// Board
+.container-board {
+  max-width: 1300px;
+  margin: 0 auto;
+  margin: 100px auto 20px;
+  padding: 0 20px;
+  min-height: 100vh;
+  .board-top {
+    background: #f6f5f4;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    .sell-user {
+      width: 40%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      img {
+        width: 45%;
+      }
+      ul {
+        width: 45%;
+        img {
+          width: 50%;
+        }
+        li {
+          margin-bottom: 10px;
+        }
+      }
+    }
+    .pet {
+      width: 40%;
+      ul {
+        text-align: center;
+        img {
+          width: 50%;
         }
       }
     }

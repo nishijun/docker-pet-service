@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\User;
 use App\Pet;
 use App\Prefecture;
 use App\AnimalCategory;
@@ -139,5 +140,10 @@ class HomeController extends Controller
         ]);
         $newFavorite->save();
       }
+    }
+
+    public function owner($id) {
+      $pet = Pet::find($id);
+      return view('owner', compact('pet'));
     }
 }

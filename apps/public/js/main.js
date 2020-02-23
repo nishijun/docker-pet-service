@@ -1,6 +1,15 @@
 $(function() {
 'use strict';
 
+// Change main image in Detail page
+let array = [];
+$('.js-click-changeThumbnail').on('click', function() {
+  array[0] = $(this).attr('src');
+  array[1] = $('.js-click-changeThumbnail-target').attr('src');
+  $('.js-click-changeThumbnail-target').attr('src', array[0]);
+  $(this).attr('src', array[1]);
+})
+
 // Image live preview
 $('.js-image-area').on('dragover', function(e) {
   e.stopPropagation();
@@ -18,7 +27,7 @@ $('.js-image').on('change', function(e) {
   let file = this.files[0],
       $img = $(this).siblings('.prev-img'),
       fileReader = new FileReader();
-      
+
   fileReader.onload = function(event) {
     $img.attr('src', event.target.result).show();
   };
