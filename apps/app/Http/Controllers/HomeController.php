@@ -106,7 +106,11 @@ class HomeController extends Controller
       if ($board->buy_user_id !== Auth::id()) {
         return redirect(route('top.detail', ['id' => $pet->id]));
       }
+
       $messages = Message::where('board_id', $bId)->get();
+      if ($messages->isEmpty()) {
+        $messages = false;
+      }
 
       return view('board', compact('board', 'pet', 'messages'));
     }
@@ -122,7 +126,7 @@ class HomeController extends Controller
         'send_user_id' => Auth::id(),
         'recieve_user_id' => $pet->user_id,
         'send_date' => Carbon::now(),
-        'body' => $request->body
+        'body' => strip_tags($request->body)
       ]);
       $message->save();
       $messages = Message::where('board_id', $bId)->get();

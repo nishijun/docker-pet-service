@@ -803,30 +803,231 @@ img {
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    .sell-user {
-      width: 40%;
+    .sell-user, .pet {
+      width: 45%;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      img {
-        width: 45%;
+    }
+    .sell-user {
+      margin-right: 5%;
+    }
+    img {
+      width: 45%;
+    }
+    ul {
+      width: 45%;
+      li {
+        margin-bottom: 10px;
       }
-      ul {
-        width: 45%;
-        img {
-          width: 50%;
+      li:first-child {
+        font-weight: bold;
+      }
+    }
+  }
+  .message-area {
+    margin-top: 30px;
+    background: #f6f5f4;
+    padding: 20px;
+    .messages {
+      max-height: 450px;
+      overflow: scroll;
+      .message {
+        width: 80%;
+        display: flex;
+        align-items: center;
+        color: $color_corp;
+        &.send {
+          justify-content: flex-end;
+          margin-left: auto;
         }
-        li {
-          margin-bottom: 10px;
+        &-img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          &.send {
+            margin-left: 20px;
+          }
+          &.recieve {
+            margin-right: 20px;
+          }
+        }
+        &-body {
+          background: #fff;
+          padding: 10px 20px;
+          &.send {
+            background: lightgreen;
+          }
+        }
+      }
+      .message-date {
+        margin: 10px 0 30px;
+        &.send {
+          text-align: right;
+        }
+      }
+      .nomessage {
+        font-size: $font-size_xl;
+        text-align: center;
+        line-height: 200px;
+      }
+    }
+  }
+  textarea {
+    margin-top: 30px;
+    width: 100%;
+    height: 200px;
+    outline: none;
+    padding: $space_m;
+    box-sizing: border-box;
+    font-size: $font-size_m;
+    border: 1px solid $color_default;
+    &:focus {
+      border: 1px solid $color_weak;
+    }
+  }
+  input[type="submit"] {
+    display: block;
+    margin: $space_l auto;
+    color: #fff;
+    font-family: $font-family_corp;
+    font-size: $font-size_xl;
+    background: $color_strong;
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+    border: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: .3s;
+    &:hover {
+      opacity: .7;
+    }
+  }
+  .link {
+    margin: 30px 0;
+  }
+  @include mq(lg) {
+    .board-top {
+      flex-direction: column;
+      justify-content: center;
+      .sell-user, .pet {
+        width: 100%;
+      }
+      .sell-user {
+        margin-right: 0;
+        margin-bottom: 30px;
+      }
+    }
+  }
+  @include mq() {
+    .board-top {
+      .sell-user, .pet {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+        img {
+          width: 70%;
+          margin-bottom: 20px;
+        }
+        ul {
+          width: 100%;
         }
       }
     }
-    .pet {
-      width: 40%;
-      ul {
-        text-align: center;
-        img {
-          width: 50%;
+    .message-area {
+      .messages {
+        font-size: $font-size_s;
+        .message {
+          width: 90%;
+          &-img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            &.send {
+              margin-left: 10px;
+            }
+            &.recieve {
+              margin-right: 10px;
+            }
+          }
+          &-body {
+            padding: 5px 10px;
+          }
+        }
+      }
+      textarea {
+        height: 100px;
+      }
+      input[type="submit"] {
+        width: 100px;
+        height: 30px;
+        line-height: 30px;
+        font-size: $font-size_l;
+      }
+    }
+  }
+}
+
+// My page
+.mypage-title {
+  font-family: $font-family_corp;
+  font-size: $font-size_xxl;
+  margin-top: 30px;
+}
+.my-pets {
+  display: flex;
+  flex-wrap: wrap;
+  .my-pet {
+    width: 25%;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    ul {
+      li {
+        font-weight: bold;
+        margin-top: 10px;
+      }
+    }
+  }
+  .nodata {
+    line-height: 3;
+    width: 100%;
+    text-align: center;
+    font-size: $font-size_xl;
+  }
+}
+.my-boards {
+  .myboard-title {
+    font-size: $font-size_xxl;
+    text-align: center;
+    margin: 30px 0 10px;
+  }
+  .my-boards {
+    table, td, th{
+      border: 1px solid $color_corp;
+    }
+    table {
+      text-align: center;
+      width: 100%;
+      margin-bottom: 30px;
+      th, td {
+        padding: 10px 0;
+        width: calc(100% / 3);
+      }
+      th {
+        background: $color_weak;
+        color: #fff;
+        font-weight: bold;
+      }
+      tbody {
+        .table-link {
+          cursor: pointer;
+          transition: .3s;
+          &:hover {
+            background: rgba(0, 0, 0, .1);
+          }
         }
       }
     }

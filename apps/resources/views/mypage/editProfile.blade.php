@@ -54,7 +54,7 @@
   <!-- Thumbnail -->
   <label for="thumbnail" class="form-label">thumbnail</label><br>
   <div class="form-image js-image-area">
-    <input type="file" name="thumbnail" value="{{ old('thumbnail') }}" class="form-image-file js-image">
+    <input type="file" name="thumbnail" value="{{ $user->thumbnail }}" class="form-image-file js-image">
     <img class="prev-img" alt="User thumbnail" @if ($user->thumbnail) src="/storage/user_thumbnails/{{ $user->thumbnail }}" @else style="display:none;" @endif>
     Choose your picture
   </div>

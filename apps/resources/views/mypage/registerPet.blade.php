@@ -3,6 +3,8 @@
 @section('content')
 <form class="form" action="{{ route('mypage.createPet') }}" method="post" enctype="multipart/form-data">
   @csrf
+
+  @if (!$edit_sign)
   <h1 class="section-title">Register Pet</h1>
   <div class="title-line"></div>
 

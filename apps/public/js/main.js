@@ -1,6 +1,16 @@
 $(function() {
 'use strict';
 
+$('tr[data-href]').addClass('clickable').click(function(e) {
+  if(!$(e.target).is('a')){
+    window.location = $(e.target).closest('tr').data('href');
+  }
+});
+
+// Scroll down automatically in Message page
+// let $scrollAuto = $('.js-scroll-down');
+// $scrollAuto.animate({scrollTop: $scrollAuto[0].scrollHeight}, 0);
+
 // Change main image in Detail page
 let array = [];
 $('.js-click-changeThumbnail').on('click', function() {

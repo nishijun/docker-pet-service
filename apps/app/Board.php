@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use App\Pet;
 use App\Message;
 
 class Board extends Model {
@@ -11,6 +12,10 @@ class Board extends Model {
 
     public function user() {
       return $this->belongsTo(User::class, 'sell_user_id');
+    }
+
+    public function pet() {
+      return $this->belongsTo(Pet::class);
     }
 
     public function messages() {

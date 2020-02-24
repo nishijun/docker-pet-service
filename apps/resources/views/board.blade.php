@@ -12,6 +12,7 @@
         <img src="{{ asset('img/noimage.png') }}" alt="No image">
       @endif
       <ul>
+        <li>Owner Information</li>
         <li><span>{{ $board->user->name }}</span> ({{ $board->user->age }})</li>
         <li>
         @switch ($board->user->gender)
@@ -29,11 +30,10 @@
         <li>{{ $board->user->prefecture->name }}</li>
       </ul>
     </div>
-
     <div class="pet">
+      <img src="/storage/pet_thumbnails/{{ $pet->pic1 }}" alt="Pet thumbnail">
       <ul>
         <li>Pet Information</li>
-        <img src="/storage/pet_thumbnails/{{ $pet->pic1 }}" alt="Pet thumbnail">
         <li><span>{{ $pet->name }}</span> ({{ $pet->age }})</li>
         <li>
         @switch ($pet->gender)
@@ -53,23 +53,36 @@
       </ul>
     </div>
   </div>
-</div>
+
+  <!-- Message area -->
   <div class="message-area">
-    <div class="messages">
+    <div class="messages js-scroll-down">
     @if ($messages)
       @foreach ($messages as $message)
-        <div class="message">
-          @if ($message->user->thumbnail)
-            <img src="/storage/user_thumbnails/{{ $message->user->thumbnail }}">
-          @else
-            <img src="{{ asset('img/noimage.png') }}" alt="">
-          @endif
-          <p>{{ $message->body }}</p>
-          <p>{{ $message->created_at }}</p>
-        </div>
+        @if ($message->send_user_id === Auth::id())
+          <div class="message send">
+            <p class="message-body send">{!! nl2br($message->body) !!}</p>
+            @if ($message->user->thumbnail)
+            <img src="/storage/user_thumbnails/{{ $message->user->thumbnail }}" alt="User thumbnail" class="message-img send">
+            @else
+            <img src="{{ asset('img/noimage.png') }}" alt="User thumbnail" class="message-img send">
+            @endif
+          </div>
+          <p class="message-date send">{{ $message->created_at }}</p>
+        @else
+          <div class="message">
+            @if ($message->user->thumbnail)
+              <img src="/storage/user_thumbnails/{{ $message->user->thumbnail }}" alt="User thumbnail" class="message-img recieve">
+            @else
+              <img src="{{ asset('img/noimage.png') }}" alt="User thumbnail" class="message-img recieve">
+            @endif
+            <p class="message-body">{!! nl2br($message->body) !!}</p>
+          </div>
+          <p class="message-date">{{ $message->created_at }}</p>
+        @endif
       @endforeach
     @else
-      <p>まだメッセージはありません</p>
+      <p class="nomessage">まだメッセージはありません</p>
     @endif
     </div>
     <form action="{{ route('message', ['id' => $pet->id, 'bId' => $board->id]) }}" method="post">
@@ -80,6 +93,9 @@
       @enderror
       <input type="submit" value="Send">
     </form>
+  </div>
+  <div class="link">
+    <a href="{{ route('top.detail', ['id' => $board->pet_id]) }}"><i class="fas fa-chevron-left"></i> Back to Pet Detail</a>
   </div>
 </div>
 @endsection
