@@ -5,29 +5,71 @@
 
   <!-- Border top -->
   <div class="board-top">
-    <div class="sell-user">
-      @if ($board->user->thumbnail)
-        <img src="/storage/user_thumbnails/{{ $board->user->thumbnail }}" alt="User thumbnail">
+    <div class="user-information">
+      @if ($board->user->id !== Auth::id())
+        @if ($board->user->thumbnail)
+          <img src="/storage/user_thumbnails/{{ $board->user->thumbnail }}" alt="User thumbnail">
+        @else
+          <img src="{{ asset('img/noimage.png') }}" alt="No image">
+        @endif
       @else
-        <img src="{{ asset('img/noimage.png') }}" alt="No image">
+        @if ($board->user->find(Auth::id())->thumbnail)
+          <img src="/storage/user_thumbnails/{{ $user->thumbnail }}" alt="User thumbnail">
+        @else
+          <img src="{{ asset('img/noimage.png') }}" alt="No image">
+        @endif
       @endif
       <ul>
-        <li>Owner Information</li>
-        <li><span>{{ $board->user->name }}</span> ({{ $board->user->age }})</li>
+        <li>@if ($board->user->id !== Auth::id()) Owner @else Buyer @endif Information</li>
         <li>
-        @switch ($board->user->gender)
-          @case (1)
-            <i class="fas fa-mars"></i>
-            @break
-          @case (2)
-            <i class="fas fa-venus"></i>
-            @break
-          @case (3)
-            <i class="fas fa-mars-stroke-h"></i>
-            @break
-        @endswitch
+        @if ($board->user->id !== Auth::id())
+          <span>{{ $board->user->name }}</span>@if ($board->user->age) ({{ $board->user->age }}) @else <span>(No age data)</span> @endif
+        @else
+          <span>{{ $user->name }}</span>@if ($user->age) ({{ $user->age }}) @else <span>(No age data)</span> @endif
+        @endif
         </li>
-        <li>{{ $board->user->prefecture->name }}</li>
+        <li>
+        @if (($board->user->id !== Auth::id()))
+          @if ($board->user->gender)
+            @switch ($board->user->gender)
+              @case (1)
+                <i class="fas fa-mars"></i>
+                @break
+              @case (2)
+                <i class="fas fa-venus"></i>
+                @break
+              @case (3)
+                <i class="fas fa-mars-stroke-h"></i>
+                @break
+            @endswitch
+          @else
+            <p>No gender data</p>
+          @endif
+        @else
+          @if ($user->gender)
+            @switch ($user->gender)
+              @case (1)
+                <i class="fas fa-mars"></i>
+                @break
+              @case (2)
+                <i class="fas fa-venus"></i>
+                @break
+              @case (3)
+                <i class="fas fa-mars-stroke-h"></i>
+                @break
+            @endswitch
+          @else
+           <p>No gender data</p>
+          @endif
+        @endif
+        </li>
+        <li>
+        @if (($board->user->id !== Auth::id()))
+          {{ $board->user->prefecture->name }}
+        @else
+          {{ $user->prefecture->name }}
+        @endif
+        </li>
       </ul>
     </div>
     <div class="pet">

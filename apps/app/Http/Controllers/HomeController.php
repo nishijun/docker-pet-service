@@ -103,7 +103,7 @@ class HomeController extends Controller
       if (!$board) {
         return redirect(route('top.detail', ['id' => $pet->id]));
       }
-      if ($board->buy_user_id !== Auth::id()) {
+      if ($board->buy_user_id !== Auth::id() && $board->sell_user_id !== Auth::id()) {
         return redirect(route('top.detail', ['id' => $pet->id]));
       }
 
@@ -111,8 +111,9 @@ class HomeController extends Controller
       if ($messages->isEmpty()) {
         $messages = false;
       }
+      $user = User::find($board->buy_user_id);
 
-      return view('board', compact('board', 'pet', 'messages'));
+      return view('board', compact('board', 'pet', 'messages', 'user'));
     }
 
     public function message(Request $request, $id, $bId) {

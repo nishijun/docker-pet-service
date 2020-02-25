@@ -803,13 +803,13 @@ img {
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    .sell-user, .pet {
+    .user-information, .pet {
       width: 45%;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
     }
-    .sell-user {
+    .user-information {
       margin-right: 5%;
     }
     img {
@@ -911,10 +911,10 @@ img {
     .board-top {
       flex-direction: column;
       justify-content: center;
-      .sell-user, .pet {
+      .user-information, .pet {
         width: 100%;
       }
-      .sell-user {
+      .user-information {
         margin-right: 0;
         margin-bottom: 30px;
       }
@@ -922,7 +922,7 @@ img {
   }
   @include mq() {
     .board-top {
-      .sell-user, .pet {
+      .user-information, .pet {
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
@@ -981,7 +981,7 @@ img {
   flex-wrap: wrap;
   .my-pet {
     width: 25%;
-    padding: 20px;
+    padding: 5px;
     box-sizing: border-box;
     text-align: center;
     ul {
@@ -996,6 +996,11 @@ img {
     width: 100%;
     text-align: center;
     font-size: $font-size_xl;
+  }
+  @include mq(lg) {
+    .my-pet {
+      width: 50%;
+    }
   }
 }
 .my-boards {

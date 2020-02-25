@@ -8,8 +8,10 @@ $('tr[data-href]').addClass('clickable').click(function(e) {
 });
 
 // Scroll down automatically in Message page
-// let $scrollAuto = $('.js-scroll-down');
-// $scrollAuto.animate({scrollTop: $scrollAuto[0].scrollHeight}, 0);
+if ($('.js-scroll-down').length) {
+  let $scrollAuto = $('.js-scroll-down');
+  $scrollAuto.animate({scrollTop: $scrollAuto[0].scrollHeight}, 0);
+}
 
 // Change main image in Detail page
 let array = [];

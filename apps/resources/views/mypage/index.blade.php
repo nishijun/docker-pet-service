@@ -51,7 +51,7 @@
         @foreach ($boards_sell as $board_sell)
           <tr data-href="{{ route('board2', ['id' => $board_sell->pet_id, 'bId' => $board_sell->id]) }}" class="table-link">
             <td>{{ $board_sell->messages->last()->created_at }}</td>
-            <td>{{ $board_sell->user->name }}</td>
+            <td>{{ $board_sell->user->find($board_sell->buy_user_id)->name }}</td>
             <td>{{ $board_sell->pet->name }}</td>
           </tr>
         @endforeach
