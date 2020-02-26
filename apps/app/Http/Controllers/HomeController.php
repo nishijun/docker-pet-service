@@ -42,6 +42,9 @@ class HomeController extends Controller
       $animal_category_id = '';
       $prefectures = Prefecture::all();
       $pets = Pet::all();
+      if ($pets->isEmpty()) {
+        $pets = false;
+      }
       $hit_count = Pet::all()->count();
       $animalCategories = AnimalCategory::all();
       return view('top', compact('pets', 'prefectures', 'animalCategories', 'prefecture_id', 'animal_category_id', 'hit_count'));
@@ -68,6 +71,10 @@ class HomeController extends Controller
         $hit_count = Pet::all()->count();
       }
 
+      if ($pets->isEmpty()) {
+        $pets = false;
+      }
+      
       $prefectures = Prefecture::all();
       $animalCategories = AnimalCategory::all();
 

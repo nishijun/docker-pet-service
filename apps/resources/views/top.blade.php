@@ -41,31 +41,35 @@
   <div class="main-wrapper">
     <p class="search-info"><span class="hit-count">{{ $hit_count }}</span> Hit</p>
     <div class="pets">
+    @if ($pets)
       @foreach ($pets as $pet)
-      <div class="pet">
-        <a href="{{ route('top.detail', ['id' => $pet->id]) }}" class="pet-link">
-          <img src="/storage/pet_thumbnails/{{ $pet->pic1 }}" alt="Pet thumbnail" class="pet-img">
-          <h2 class="pet-name">{{ $pet->name }}<span class="pet-age"> ({{ $pet->age }})</span></h2>
-          <p class="pet-info">
-            <span class="pet-category">{{ $pet->animalCategory->name }}</span>
-            <span class="pet-gender">
-              @switch ($pet->gender)
-              @case (1)
-                <i class="fas fa-mars"></i>
-                @break
-              @case (2)
-                <i class="fas fa-venus"></i>
-                @break
-              @case (3)
-                <i class="fas fa-mars-stroke-h"></i>
-                @break
-              @endswitch
-            </span>
-          </p>
-          <p class="pet-prefecture">{{ $pet->user->prefecture->name }}</p>
-        </a>
-      </div>
+        <div class="pet">
+          <a href="{{ route('top.detail', ['id' => $pet->id]) }}" class="pet-link">
+            <img src="/storage/pet_thumbnails/{{ $pet->pic1 }}" alt="Pet thumbnail" class="pet-img">
+            <h2 class="pet-name">{{ $pet->name }}<span class="pet-age"> ({{ $pet->age }})</span></h2>
+            <p class="pet-info">
+              <span class="pet-category">{{ $pet->animalCategory->name }}</span>
+              <span class="pet-gender">
+                @switch ($pet->gender)
+                @case (1)
+                  <i class="fas fa-mars"></i>
+                  @break
+                @case (2)
+                  <i class="fas fa-venus"></i>
+                  @break
+                @case (3)
+                  <i class="fas fa-mars-stroke-h"></i>
+                  @break
+                @endswitch
+              </span>
+            </p>
+            <p class="pet-prefecture">{{ $pet->user->prefecture->name }}</p>
+          </a>
+        </div>
       @endforeach
+    @else
+      <p class="no-search-data">No data</p>
+    @endif
     </div>
   </div>
 </div>

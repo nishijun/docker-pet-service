@@ -561,6 +561,12 @@ img {
           }
         }
       }
+      .no-search-data {
+        font-size: $font-size_3l;
+        width: 100%;
+        line-height: 200px;
+        text-align: center;
+      }
     }
   }
   @include mq(lg) {

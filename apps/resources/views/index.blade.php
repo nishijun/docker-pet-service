@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('title', 'Home')
 @section('content')
+
+<!-- Hero view -->
 <div class="hero">
   <div class="hero-cover">
     <h1 class="hero-title">PetService</h1>
